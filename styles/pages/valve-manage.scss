@@ -1,0 +1,402 @@
+@use '../boot';
+
+.valve-manage {
+    $layoutBreakpoint: $bp-desktop-sm + 10em;
+
+    @include container;
+
+    @media (min-height: 800px) or (max-width: $bp-phone-lg) {
+        @include full-height-minus-bars(height, calc(vh(100) - $layoutVerticalPadding * 2));
+    }
+
+    display: flex;
+    align-items: flex-start;
+    gap: $gap3;
+
+    @include respond-max($layoutBreakpoint) {
+        flex-direction: column;
+    }
+
+    &__left {
+        display: flex;
+        gap: $gap3;
+        flex-direction: column;
+
+        @include respond-max($layoutBreakpoint) {
+            width: 100%;
+        }
+
+        &__content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: $gap2;
+
+            @include respond-max($bp-phone-lg + 2em) {
+                flex-direction: column;
+                align-items: stretch;
+
+                & > * {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    &__right {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2rem;
+        padding-bottom: 2rem;
+        height: 100%;
+        overflow: hidden;
+
+        @include respond-max($layoutBreakpoint) {
+            width: 100%;
+        }
+    }
+
+    &__list {
+        display: inherit;
+        flex-direction: inherit;
+        align-items: inherit;
+        gap: inherit;
+    }
+
+    &__title {
+        font-size: $fontSizeHuge;
+        font-weight: $fontWeight4;
+        text-align: center;
+    }
+
+    &__title2 {
+        font-size: $fontSizeBig;
+        font-weight: $fontWeight3;
+
+        text-align: left;
+    }
+
+    &__head {
+        display: flex;
+        gap: 1rem;
+
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__pie {
+        width: 2.5rem;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+    }
+
+    &__boxes {
+        display: flex;
+        grid-auto-flow: column;
+        gap: 2rem;
+        flex-wrap: wrap;
+
+        & > * {
+            flex-grow: 1;
+        }
+    }
+
+    &__box {
+        @extend .box--light;
+
+        padding: $btn-padding;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 1rem;
+
+        & :nth-child(1) {
+            font-size: $fontSizeNormal;
+            font-weight: $fontWeight3;
+            color: $colorGrey2;
+        }
+
+        & :nth-child(2) {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+
+            font-size: $fontSizeBig;
+            font-weight: $fontWeight3;
+        }
+
+        & :nth-child(3) {
+            font-size: $fontSizeNormal;
+            font-weight: $fontWeight1;
+            color: $colorGrey2;
+            opacity: 0.75;
+        }
+    }
+
+    &__recipient {
+        @extend .box--black;
+
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        padding: $btn-padding-small;
+        gap: $gap1;
+        align-items: stretch;
+        container-type: inline-size;
+
+        @include respond-max($bp-phone-lg) {
+            flex-direction: column;
+        }
+
+        &__first-part {
+            display: flex;
+            align-items: center;
+            flex-shrink: 1;
+
+            & .btn--primary-text__text {
+                display: flex;
+            }
+        }
+
+        &__address-part {
+            flex-grow: 1;
+            text-align: left;
+            // padding: 0 $btn-padding-horizontal;
+            color: $colorGrey1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+
+            &__name {
+                padding: $btn-padding-small;
+                color: $colorWhite;
+                font-size: $fontSizeBig;
+            }
+
+            & .address-box {
+                height: 100%;
+                // padding-inline: $btn-padding-horizontal;
+                @extend .box--transparent;
+
+                // @include respond-max($bp-phone-lg) {
+                //     & .address-box__copy-icon {
+                //         display: none;
+                //     }
+                // }
+            }
+
+            & .input-with-label {
+                padding: $btn-padding-small;
+            }
+        }
+
+        &__input-part {
+            flex-grow: 1;
+            padding: 0;
+            color: $colorGrey1;
+
+            display: flex;
+            flex-direction: column;
+            gap: $gap1;
+
+            & > :first-child {
+                height: 100%;
+            }
+
+            & .input-with-label {
+                padding: $btn-padding-small;
+                height: 100%;
+
+                & input {
+                    font-size: $fontSizeSmall;
+
+                    @include respond-max($bp-phone-lg) {
+                        max-width: 10rem;
+                    }
+                }
+            }
+
+            &__address-input {
+                font-weight: $fontWeight1 !important;
+                width: 100%;
+            }
+        }
+
+        &__remove {
+            // @extend .btn--light;
+            display: flex;
+            padding: $btn-padding-vertical / 2 !important;
+            display: grid;
+            place-content: center;
+            & * {
+                color: #fff;
+            }
+        }
+    }
+
+    &__recipients {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        height: 100%;
+
+        overflow: auto;
+        overflow: overlay;
+
+        @extend .scroll-box;
+
+        &__buttons {
+            gap: $gap1;
+            display: flex;
+            flex-wrap: wrap;
+
+            & > * {
+                white-space: nowrap;
+
+                flex-grow: 1;
+            }
+        }
+    }
+
+    &__bottom-line {
+        width: 80%;
+        height: 3px;
+        border-radius: 10px;
+        align-self: center;
+        background: $colorGrey1;
+        color: $colorPrimary;
+
+        & > :first-child {
+            transition: width 0.5s;
+            height: 100%;
+            border-radius: inherit;
+            background: $primaryGradient;
+            max-width: 100%;
+        }
+
+        &.--error > :first-child {
+            background: $colorError;
+        }
+    }
+}
+
+.waterfall-manage {
+    &__recipient {
+        @extend .box--black;
+
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        padding: $btn-padding-small;
+        gap: $gap1;
+        align-items: stretch;
+        container-type: inline-size;
+
+        @include respond-max($bp-phone-lg) {
+            flex-direction: column;
+        }
+
+        &__first-part {
+            display: flex;
+            align-items: center;
+            flex-shrink: 1;
+
+            & .btn--primary-text__text {
+                display: flex;
+            }
+        }
+
+        &__address-part {
+            flex-grow: 1;
+            text-align: left;
+            // padding: 0 $btn-padding-horizontal;
+            color: $colorGrey1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+
+            &__name {
+                padding: $btn-padding-small;
+                color: $colorWhite;
+                font-size: $fontSizeBig;
+            }
+
+            & .address-box {
+                height: 100%;
+                // padding-inline: $btn-padding-horizontal;
+                @extend .box--transparent;
+
+                // @include respond-max($bp-phone-lg) {
+                //     & .address-box__copy-icon {
+                //         display: none;
+                //     }
+                // }
+            }
+
+            & .input-with-label {
+                padding: $btn-padding-small;
+            }
+        }
+
+        &__input-part {
+            flex-grow: 1;
+            padding: 0;
+            color: $colorGrey1;
+
+            display: flex;
+            flex-direction: column;
+            gap: $gap1;
+
+            @container (min-width: 715px) {
+                // flex-direction: row;
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+            }
+
+            @container (min-width: 1000px) {
+                // flex-direction: row;
+                display: flex;
+                flex-direction: row;
+                // grid-template-columns: 1fr 2fr;
+                & > :nth-child(2) {
+                    // flex-basis: unset;
+                    flex-grow: 1;
+                    flex-basis: 400px;
+                }
+            }
+
+            & .input-with-label {
+                padding: $btn-padding-small;
+
+                & input {
+                    font-size: $fontSizeSmall;
+
+                    @include respond-max($bp-phone-lg) {
+                        max-width: 10rem;
+                    }
+                }
+            }
+
+            &__address-input {
+                font-weight: $fontWeight1 !important;
+                width: 100%;
+            }
+        }
+
+        &__remove {
+            // @extend .btn--light;
+            display: flex;
+            padding: $btn-padding-vertical / 2 !important;
+            display: grid;
+            place-content: center;
+            & * {
+                color: #fff;
+            }
+        }
+    }
+}

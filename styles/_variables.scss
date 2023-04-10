@@ -1,0 +1,93 @@
+$colorBlue: #5951f6;
+$colorPink: #ee3674;
+$colorPrimary: $colorPink;
+$colorPrimaryLighter: #e6f2ff;
+$colorLightBlue: #19fff1;
+$colorBlack: #000;
+$colorGrey0: #18171c;
+$colorGrey1: #2f2f37;
+$colorGrey2: #75788a;
+$colorGrey3: #c8cad0;
+$colorGrey4: #f8f8f8;
+$colorWhite: #fff;
+
+$fontSizeNormal: 1.7rem;
+$fontSizeSmall: 1.4rem;
+$fontSizeBig: 2.2rem;
+$fontSizeHuge: 3.2rem;
+
+$bp-desktop-sm: 75em; // 1200px
+$bp-tablet-land: 62.5em; // 1000px
+$bp-tablet: 48em; // 768px
+$bp-phone-lg: 27em; // 425px
+$bp-phone-sm: 23.5em;
+
+$fontWeight1: 300;
+$fontWeight2: 400;
+$fontWeight3: 600;
+$fontWeight4: 700;
+
+$colorError: #ad0a12;
+$colorWarning: #e18615;
+$colorInfo: $colorLightBlue;
+$colorSuccess: #27ae60;
+
+$btn-padding-vertical: 1.4rem;
+$btn-padding-horizontal: 2rem;
+$btn-padding: $btn-padding-vertical $btn-padding-horizontal;
+
+$btn-padding-small-vertical: $btn-padding-vertical / 2;
+$btn-padding-small-horizontal: 1.5rem;
+
+$btn-padding-small: $btn-padding-small-vertical $btn-padding-small-horizontal;
+
+$card-padding-vertical: $btn-padding-vertical * 2;
+$card-padding-horizontal: $btn-padding-horizontal * 2;
+$card-padding: $card-padding-vertical $card-padding-horizontal;
+
+$dialog-padding: $card-padding-vertical * 1.5 $card-padding-horizontal;
+
+$btn-radius: 8px;
+$card-radius: $btn-radius * 2;
+
+$shadowPrimary: 1rem 1rem 3rem rgba($colorPrimary, 0.08);
+
+$navbarHeight: 8rem;
+
+$gap1: 1rem;
+$gap2: 2rem;
+$gap3: 4rem;
+
+$primaryGradient: linear-gradient(93.69deg, $colorPink -2.56%, $colorBlue 105.65%);
+
+:root {
+    --color-primary: #{$colorPrimary};
+    --color-pink: #{$colorPink};
+    --color-blue: #{$colorBlue};
+    --color-black: #{$colorBlack};
+    --color-white: #{$colorWhite};
+    --color-grey1: #{$colorGrey1};
+    --color-grey2: #{$colorGrey2};
+    --color-grey3: #{$colorGrey3};
+    --color-grey4: #{$colorGrey4};
+
+    --color-error: #{$colorError};
+
+    --font-weight1: $fontWeight1;
+    --font-weight2: $fontWeight2;
+    --font-weight3: $fontWeight3;
+    --font-weight4: $fontWeight4;
+
+    --layout-vertical-padding: 3.5rem;
+
+    --bp-desktop-sm: $bp-desktop-sm;
+    --bp-tablet-land: $bp-tablet-land;
+    --bp-tablet: $bp-tablet;
+    --bp-phone-lg: $bp-phone-lg;
+    --bp-phone-sm: $bp-phone-sm;
+
+    --btn-padding-small: $btn-padding-small;
+    --btn-padding-horizontal: $btn-padding-horizontal;
+}
+
+$layoutVerticalPadding: var(--layout-vertical-padding);

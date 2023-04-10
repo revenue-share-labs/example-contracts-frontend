@@ -1,0 +1,27 @@
+@use './_variables';
+
+.btn-padding {
+    padding: $btn-padding;
+}
+
+.color-error {
+    color: $colorError;
+}
+
+.color-success {
+    color: $colorSuccess;
+}
+
+.color-primary {
+    color: $colorPrimary;
+}
+
+.loading {
+    display: block;
+    margin: auto;
+    gap: inherit;
+
+    & * {
+        background-color: $colorWhite !important;
+    }
+}

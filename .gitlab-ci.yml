@@ -1,0 +1,61 @@
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
+stages:
+  - build
+  - deploy
+
+build:image:       # This job runs in the build stage, which runs first.
+  stage: build
+  image: docker:20.10.16
+  environment: prod
+  only: [main]
+  services:
+    - docker:20.10.16-dind
+  script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - cp .env.production .env
+    - docker build -t $CI_REGISTRY_IMAGE .
+    - docker push $CI_REGISTRY_IMAGE
+
+deploy:prod:
+  image: ubuntu
+  stage: deploy
+  environment: 
+    name: prod
+  only: [main]
+  before_script:
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - echo "StrictHostKeyChecking no" >> ~/.ssh/config
+    - echo "PubkeyAcceptedKeyTypes +ssh-rsa" >> ~/.ssh/config
+ 
+  script:
+    - echo "Deploying application..."
+
+    - echo "Server 1" $SSH_SERVER1
+    - export SSH_CONNECT="$DEPLOY_USER@${SSH_SERVER1}"
+    - scp .env.production $SSH_CONNECT:.env
+    - scp docker-compose.yml $SSH_CONNECT:docker-compose.yml
+    - ssh $SSH_CONNECT "echo $REGISTRY_PASS | sudo docker login -u $REGISTRY_USER $CI_REGISTRY --password-stdin"
+    - ssh $SSH_CONNECT "sudo docker-compose pull"
+    - ssh $SSH_CONNECT "sudo docker-compose up -d --build --remove-orphans"
+    - ssh $SSH_CONNECT "sudo docker container prune -f"
+    - ssh $SSH_CONNECT "sudo docker image prune -af"
+
+    - echo "Server 2" $SSH_SERVER2
+    - export SSH_CONNECT="$DEPLOY_USER@${SSH_SERVER2}"
+    - scp .env.production $SSH_CONNECT:.env
+    - scp docker-compose.yml $SSH_CONNECT:docker-compose.yml
+    - ssh $SSH_CONNECT "echo $REGISTRY_PASS | sudo docker login -u $REGISTRY_USER $CI_REGISTRY --password-stdin"
+    - ssh $SSH_CONNECT "sudo docker-compose pull"
+    - ssh $SSH_CONNECT "sudo docker-compose up -d --build --remove-orphans"
+    - ssh $SSH_CONNECT "sudo docker container prune -f"
+    - ssh $SSH_CONNECT "sudo docker image prune -af"
+
+    - echo "Application successfully deployed."

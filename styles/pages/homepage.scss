@@ -1,0 +1,172 @@
+@use '../boot';
+
+$buttonsMaxWidth: 60rem;
+
+.homepage {
+    @include container;
+    // @include full-height-minus-bars(min-height, calc(vh(100) - $layoutVerticalPadding * 2));
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6rem;
+    z-index: 2;
+
+    &__background {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    &__head {
+        display: flex;
+        gap: 1rem;
+
+        &__logo {
+            width: 15rem;
+        }
+    }
+
+    &__title {
+        font-size: $fontSizeHuge;
+        color: $colorWhite;
+    }
+
+    &__subtitle {
+        font-size: $fontSizeBig;
+        font-weight: $fontWeight1;
+        color: $colorGrey2;
+        max-width: 40rem;
+    }
+
+    &__nav {
+        gap: 2rem;
+
+        display: grid;
+        width: 100%;
+        max-width: $buttonsMaxWidth;
+
+        grid-template-columns: 1fr 1fr 1fr;
+
+        @include respond-max($bp-phone-lg) {
+            display: flex;
+            flex-direction: column;
+        }
+
+        & :nth-child(1) {
+            grid-column: 1 / span 2;
+        }
+    }
+
+    &__social-btns {
+        display: grid;
+        width: 100%;
+        max-width: $buttonsMaxWidth;
+        gap: 2rem;
+
+        grid-template-columns: repeat(6, auto);
+
+        @include respond-max($bp-tablet) {
+            grid-template-columns: repeat(4, auto);
+        }
+
+        & > * {
+            @extend .btn--black;
+            @extend .box--round;
+        }
+
+        & > * {
+            padding: $btn-padding-small !important;
+        }
+    }
+    &__subscribe {
+        display: flex;
+        gap: $gap1;
+
+        @include respond-max($bp-phone-lg) {
+            width: 100%;
+        }
+
+        & :nth-child(1) {
+            grid-column: span 4;
+            width: 30rem;
+
+            @include respond-max($bp-phone-lg) {
+                width: 100%;
+            }
+        }
+
+        & :nth-child(2) {
+            grid-column: span 2;
+
+            @include respond-max($bp-tablet) {
+                grid-column: span 4;
+            }
+        }
+    }
+
+    &__cards {
+        display: flex;
+        gap: $gap2;
+        width: 100%;
+        align-self: stretch;
+        justify-content: stretch;
+
+        @include respond-max($bp-phone-lg + 7em) {
+            flex-direction: column;
+        }
+    }
+
+    &__card {
+        flex-grow: 1;
+        padding: $card-padding;
+        border-radius: $card-radius;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        background: $colorBlack;
+        align-items: baseline;
+        justify-content: flex-end;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+            scale: 1.02;
+        }
+
+        &.--black {
+            @extend .box--black;
+        }
+        &.--black &__view-more {
+            @extend .text-primary-gradient;
+
+            & svg {
+                color: $colorBlue;
+            }
+        }
+        &.--black > span {
+            color: $colorGrey2;
+        }
+
+        &.--primary {
+            @extend .box--primary;
+        }
+        &.--primary > span {
+            color: $colorGrey3;
+        }
+
+        &__view-more {
+            @extend .box--with-icon;
+            color: $colorWhite;
+            align-self: flex-end;
+            padding-bottom: $gap3;
+            margin-bottom: auto;
+        }
+    }
+}

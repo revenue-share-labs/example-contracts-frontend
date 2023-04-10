@@ -1,0 +1,124 @@
+@use 'sass:color';
+
+.exchange-box {
+    padding: $card-padding;
+    border-radius: $card-radius;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @include respond-min($bp-tablet) {
+        min-width: 55rem;
+    }
+
+    $titleSelector: '.exchange-box__title';
+
+    #{$titleSelector} {
+        transition: all 0.2s;
+        font-size: $fontSizeNormal;
+        font-weight: $fontWeight4;
+        color: inherit;
+        text-align: center;
+        align-self: baseline;
+    }
+
+    &__input-part {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 1rem;
+        color: inherit;
+
+        & input {
+            @extend .transparent-input;
+
+            color: inherit !important;
+            font-size: $fontSizeHuge;
+            width: 100%;
+
+            &::placeholder {
+                opacity: 0.5;
+                color: inherit !important;
+            }
+        }
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+        color: inherit;
+
+        & > * {
+            font-size: $fontSizeSmall;
+            color: inherit;
+            font-weight: $fontWeight1;
+        }
+    }
+
+    &__currency-icon {
+        width: 2rem;
+        color: $colorWhite;
+        transition: color 0.2s;
+
+        // &::before {
+        //     content: '';
+        //     position: absolute;
+        //     aspect-ratio: 1 / 1;
+        //     border-radius: 50%;
+        //     background-color: #fff;
+        //     padding: 1rem;
+        //     display: grid;
+        //     place-content: center;
+        //     z-index: -1;
+        // }
+
+        &__eth {
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background-color: #fff;
+            padding: 1rem;
+            width: 5rem;
+        }
+    }
+
+    &--disabled {
+        @extend .box--primary;
+
+        // #{$titleSelector} {
+        //     color: $colorGrey2;
+        // }
+
+        // & input {
+        //     color: $colorGrey1;
+        // }
+
+        & input::placeholder {
+            color: color.adjust($colorWhite, $alpha: -0.4);
+        }
+
+        & .exchange-box__currency-icon {
+            color: $colorWhite;
+        }
+    }
+
+    &--blur {
+        @extend .box--black;
+        color: $colorGrey3;
+
+        // & input {
+        //     color: $colorPrimary;
+        // }
+    }
+
+    &--focus {
+        @extend .box--grey;
+
+        color: $colorGrey4;
+
+        // #{$titleSelector} {
+        //     color: $colorGrey1;
+        // }
+    }
+}

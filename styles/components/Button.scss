@@ -1,0 +1,206 @@
+@use '../boot.scss';
+
+@keyframes moveMask {
+    0% {
+        mask-position: 0px 0px;
+    }
+    50% {
+        mask-position: 100px 100px;
+    }
+    100% {
+        mask-position: 0px 0px;
+    }
+}
+
+.btn {
+    @extend .box;
+
+    padding: $btn-padding;
+    border-radius: $btn-radius;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+
+    &--grey {
+        @extend .btn;
+        @extend .box--grey;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &--primary {
+        @extend .btn;
+        @extend .box--primary;
+
+        transition: all 0.2s, mask-size 3s;
+        mask-size: 50rem;
+        border: 1px solid $colorBlack;
+        mask-repeat: repeat;
+
+        &:disabled {
+            @extend .box--black;
+            color: $colorGrey1;
+            cursor: initial;
+        }
+
+        &:hover:not(&:disabled):not(&:active) {
+            opacity: 0.8;
+        }
+
+        &:active {
+            opacity: 1;
+        }
+    }
+
+    &--outline {
+        @extend .btn;
+        @extend .box--outline;
+
+        &:disabled {
+            @extend .box--black;
+            color: $colorGrey1;
+            cursor: initial;
+        }
+
+        &:hover:not(&:disabled) {
+            background-color: rgba($colorPink, 0.4);
+            opacity: 0.8;
+        }
+    }
+
+    &--black {
+        @extend .btn;
+        @extend .box--black;
+
+        &:hover {
+            @extend .box--grey;
+            // background: $colorWhite;
+        }
+    }
+
+    &--primary-text {
+        @extend .btn;
+
+        position: relative;
+        background: linear-gradient(90deg, $colorGrey1, $colorGrey1);
+        z-index: 1;
+        color: transparent;
+        color: $colorWhite;
+
+        &:disabled {
+            @extend .box--black;
+
+            border: none;
+            pointer-events: none;
+            cursor: not-allowed;
+            color: $colorGrey1;
+        }
+
+        &:disabled > &__text {
+            // display: none;
+            color: $colorGrey1;
+            background: $colorBlack;
+            background-clip: unset;
+        }
+
+        &::after {
+            width: calc(100% - 2px);
+            height: calc(100% - 2px);
+            content: '';
+            display: grid;
+            place-content: center;
+            background-color: black;
+            z-index: -2;
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            border-radius: inherit;
+        }
+
+        &__text {
+            // background: $primaryGradient;
+            @extend .text-primary-gradient;
+
+            // width: calc(100% - 2px);
+            // height: calc(100% - 2px);
+            // color: yellow;
+            // display: grid;
+            // place-content: center;
+            background-color: $colorBlack;
+            z-index: -1;
+            // top: 1px;
+            // left: 1px;
+            // border-radius: inherit;
+        }
+        &:hover {
+            // border: 1px solid linear-gradient(90deg, $colorPink, #fff);
+            background: $primaryGradient;
+
+            // background: white;
+            // background: $colorWhite;
+        }
+    }
+
+    &--light {
+        @extend .btn;
+        @extend .box--light;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &--transparent {
+        @extend .btn;
+        @extend .box--transparent;
+
+        &:hover {
+            @extend .box--outline;
+        }
+    }
+
+    &--padding-small {
+        padding: $btn-padding-small;
+    }
+
+    &--padding-no-vertical {
+        padding-block: 1px;
+    }
+
+    &--wider {
+        padding-inline: $card-padding-horizontal;
+    }
+
+    &--widest {
+        width: 100%;
+    }
+
+    &--for-input {
+        @extend .btn--black;
+        @extend .only--tablet--up;
+
+        font-size: $fontSizeSmall !important;
+        padding: $btn-padding-small-vertical - 0.1rem $btn-padding-small-horizontal;
+    }
+
+    &:focus {
+        outline: 2px solid $colorPink;
+        // box-shadow: 0 0 0 2px $colorPink;
+    }
+}
+
+.back-btn {
+    @extend .btn--transparent;
+
+    padding: $btn-padding-small;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reload-btn {
+    display: flex;
+}

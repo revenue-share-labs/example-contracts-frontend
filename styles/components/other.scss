@@ -1,0 +1,111 @@
+@use './_variables';
+@use 'sass:meta';
+
+.transparent-input {
+    border: none;
+    // color: $colorGrey1;
+    background-color: transparent;
+    outline: none;
+    transition: all 0.2s;
+    padding: 0;
+
+    &::placeholder {
+        color: $colorGrey2;
+    }
+}
+
+.address-box {
+    @extend .box--black;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: $btn-padding-small;
+    justify-content: space-between;
+
+    &__grey-text {
+        color: $colorGrey2;
+        white-space: nowrap;
+    }
+
+    &__address {
+        // @extend .text-primary-gradient;
+        color: $colorWhite;
+        cursor: pointer;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        flex-basis: 100%;
+        text-align: left;
+        font-weight: $fontWeight4;
+        text-decoration: none;
+    }
+
+    &__copy-icon {
+        color: $colorGrey2;
+        cursor: pointer;
+        width: 3.5rem;
+    }
+
+    &__open-icon {
+        @extend .box--primary;
+        cursor: pointer;
+
+        border-radius: $btn-radius / 2;
+        padding: $btn-padding-vertical / 4 0.5rem;
+        display: flex;
+        align-self: stretch;
+        display: grid;
+        place-content: center;
+    }
+}
+
+.container {
+    @include container;
+}
+
+.separator {
+    background-color: $colorGrey1;
+    height: 1px;
+    width: 100%;
+}
+
+.separator-vertical {
+    background-color: $colorGrey1;
+    align-self: stretch;
+    // height: 100%;
+    height: auto;
+    width: 1px;
+}
+
+.scroll-box {
+    // background: linear-gradient(transparent 33%, rgba(194, 255, 96, 0)), linear-gradient(rgba(194, 255, 96, 0), transparent 66%) 0 100%,
+    //     radial-gradient(farthest-side at 50% 0, rgba(34, 34, 34, 0.5), rgba(0, 0, 0, 0)),
+    //     radial-gradient(farthest-side at 50% 100%, rgba(34, 34, 34, 0.5), rgba(0, 0, 0, 0)) 0 100%;
+    // background-color: transparent;
+    // background-repeat: no-repeat;
+    // background-attachment: local, local, scroll, scroll;
+    // background-size: 100% 45px, 100% 45px, 100% 15px, 100% 15px;
+}
+
+$breakpoints: (
+    desktop-sm: $bp-desktop-sm,
+    tablet-land: $bp-tablet-land,
+    tablet: $bp-tablet,
+    phone-lg: $bp-phone-lg,
+    phone-sm: $bp-phone-sm,
+);
+
+// -> .only--tablet--down
+@each $name, $var in $breakpoints {
+    .only--#{meta.inspect($name)}--down {
+        @include respond-min($var) {
+            display: none;
+        }
+    }
+
+    .only--#{meta.inspect($name)}--up {
+        @include respond-max($var) {
+            display: none;
+        }
+    }
+}

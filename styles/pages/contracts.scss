@@ -1,0 +1,119 @@
+$layoutBp: $bp-phone-lg + 10em;
+
+.contracts {
+    @include container;
+
+    @media (min-height: 800px) {
+        @include full-height-minus-bars(height, calc(vh(100) - $layoutVerticalPadding * 2));
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: $gap3;
+    height: 100%;
+
+    &__head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: $gap2;
+
+        @include respond-max($layoutBp) {
+            flex-direction: column;
+            gap: $gap3;
+        }
+
+        &__buttons {
+            display: flex;
+            gap: $gap2;
+            align-items: stretch;
+
+            @include respond-max($layoutBp) {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            & > .switch {
+                width: 30rem;
+            }
+        }
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        padding: $btn-padding;
+        gap: 1rem;
+        align-items: center;
+
+        @include respond-max($bp-tablet) {
+            gap: 0.5rem;
+            padding: $btn-padding-small;
+        }
+    }
+
+    &__sorting-row {
+        @extend .box;
+        @extend .contracts__row;
+
+        padding-bottom: 0;
+
+        @include respond-max($layoutBp) {
+            display: none;
+        }
+
+        & > *:not(:first-child) {
+            font-size: $fontSizeNormal;
+            color: $colorGrey2;
+            padding: 0;
+        }
+    }
+
+    &__list {
+        display: inherit;
+        flex-direction: inherit;
+        align-items: inherit;
+        gap: inherit;
+        padding-bottom: $gap3 * 3;
+    }
+
+    &__field {
+        &-name {
+            flex-basis: max(15rem, 25%);
+        }
+
+        &-contract-address {
+            flex-basis: max(15rem, 25%);
+        }
+
+        &-owner {
+            flex-basis: max(15rem, 25%);
+        }
+
+        &-type {
+            flex-basis: max(20rem, 25%);
+        }
+    }
+
+    &__table {
+        display: grid;
+        gap: $gap2;
+    }
+
+    &__item {
+        @extend .contracts__row;
+        color: $colorWhite !important;
+        cursor: pointer;
+
+        @include respond-max($layoutBp) {
+            flex-direction: column;
+        }
+
+        &:not(:hover) {
+            @extend .box--grey;
+        }
+        &:hover {
+            @extend .box--light;
+        }
+    }
+}

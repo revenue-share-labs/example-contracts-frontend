@@ -1,0 +1,42 @@
+.connect-wallet-modal {
+    // padding: $card-padding;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &__title {
+        font-size: $fontSizeBig;
+        font-weight: $fontWeight3;
+        text-align: center;
+    }
+
+    @media not all and (min-resolution: 0.001dpcm) {
+        @supports (-webkit-appearance: none) {
+            &__title {
+            }
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        & > * {
+            @extend .btn--black;
+
+            &:hover {
+                @extend .btn--outline;
+            }
+            &:active {
+                &:hover {
+                    @extend .btn--primary;
+                }
+                @extend .btn--primary;
+            }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+    }
+}

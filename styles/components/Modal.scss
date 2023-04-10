@@ -1,0 +1,197 @@
+@use './_variables';
+
+.modal {
+    @include container;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 10000;
+    pointer-events: none;
+
+    display: flex;
+    justify-content: center;
+
+    @include respond-max($bp-phone-lg) {
+        width: 100vw;
+        padding: 0;
+        top: unset;
+        bottom: 0;
+        translate: -50% 0%;
+    }
+
+    &__backdrop {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        z-index: 10;
+        backdrop-filter: blur(20px);
+
+        mask-image: url('/img/xla-logo-inverted-5.svg');
+        mask-size: 15rem;
+
+        mask-repeat: repeat;
+
+        @include safari {
+            mask-image: none;
+        }
+
+        @include firefox {
+            mask-image: none;
+        }
+    }
+
+    &__backdrop-2 {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        z-index: 10;
+        backdrop-filter: blur(2px);
+        background-color: rgba(255, 255, 255, 0.05);
+
+        @include safari {
+            display: none;
+        }
+    }
+
+    &__content {
+        padding: $dialog-padding;
+        background-color: $colorGrey0;
+        border-radius: $card-radius;
+        border: 1px solid $colorGrey1;
+        box-shadow: 0rem 0rem 3rem 2rem rgba($colorBlack, 0.4);
+        position: relative;
+        pointer-events: initial;
+        max-width: 100%;
+
+        @include respond-max($bp-phone-lg) {
+            width: 100%;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        & > :nth-child(2) {
+            width: 50rem;
+            max-width: 100%;
+        }
+    }
+
+    &__head {
+        &__title {
+            font-size: $fontSizeBig;
+            font-weight: $fontWeight1;
+            color: $colorGrey1;
+        }
+
+        &__close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            margin: $btn-padding-vertical / 2;
+            display: flex;
+            cursor: pointer;
+            border-radius: 50%;
+            padding: $btn-padding-vertical / 2;
+            transition: background-color 0.2s, transform 0.1s;
+            transform-origin: center;
+            font-size: 2.5rem;
+
+            @include respond-max($bp-phone-lg) {
+                padding: $btn-padding-vertical / 1.5;
+                margin: $btn-padding-vertical * 2;
+                background-color: $colorGrey1;
+                color: $colorWhite;
+                opacity: 0.5;
+            }
+
+            &:active {
+                background-color: $colorGrey3;
+                transform: scale(0.9);
+            }
+        }
+    }
+}
+
+.nextui-backdrop-layer {
+    display: none;
+}
+
+.transaction-loading-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+
+    &__title {
+        font-size: $fontSizeBig;
+        font-weight: $fontWeight3;
+        text-align: center;
+    }
+
+    &__subtitle {
+        font-size: $fontSizeNormal;
+        font-weight: $fontWeight3;
+        color: $colorGrey3;
+        text-align: center;
+    }
+}
+
+.slippage-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+
+    & .input-with-label__wrapper {
+        @extend .box--grey;
+
+        & input {
+            max-width: 4rem;
+            text-align: center;
+        }
+    }
+}
+
+.add-affiliate-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3rem;
+
+    // width: 40rem !important;
+
+    &__icon {
+        align-self: center;
+        color: $colorPrimary;
+    }
+
+    &__url-text {
+        font-size: $fontSizeNormal;
+        font-weight: $fontWeight3;
+        align-self: flex-start;
+        margin-bottom: -2rem;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 3rem;
+        align-items: center;
+    }
+}
+
+.set-owner-modal {
+    &__buttons {
+        width: 100%;
+        align-items: stretch;
+        justify-content: stretch;
+
+        @include respond-max($bp-tablet) {
+            display: grid;
+        }
+    }
+}

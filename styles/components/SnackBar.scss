@@ -1,0 +1,76 @@
+@use '../_variables.scss';
+
+.snackbar {
+    &__content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &__left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: $gap1;
+        }
+    }
+
+    &__close {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        cursor: pointer;
+
+        :hover {
+            background-color: grey;
+        }
+    }
+
+    &__variant {
+        display: flex;
+        align-items: center;
+        margin: 10px 10px;
+
+        padding: $btn-padding-small;
+
+        &-success {
+            @extend .snackbar__variant;
+            @extend .box--primary;
+            // background-color: $colorSuccess;
+        }
+        &-error {
+            @extend .snackbar__variant;
+            @extend .box;
+
+            background-color: $colorError;
+        }
+        &-warning {
+            @extend .snackbar__variant;
+            @extend .box;
+            background-color: $colorWarning;
+        }
+        &-info {
+            @extend .snackbar__variant;
+            @extend .box--black;
+        }
+    }
+}
+
+.Toastify {
+    z-index: 100000000;
+    position: relative;
+
+    &__close-button {
+        display: grid !important;
+        align-self: center !important;
+        padding: 10px !important;
+    }
+
+    &__toast-container {
+        min-width: fit-content !important;
+        max-width: 100% !important;
+    }
+}

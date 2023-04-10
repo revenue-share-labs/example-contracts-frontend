@@ -1,0 +1,296 @@
+$iconMargin: 1rem;
+
+$roadmapBp: $bp-phone-sm;
+
+.factory {
+    @include container;
+
+    @media (min-height: 800px) {
+        // &:not(:has(.factory__summary)) {
+        @include full-height-minus-bars(min-height, calc(vh(100) - $layoutVerticalPadding * 2));
+        // }
+    }
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: $gap2;
+    flex-grow: 1;
+
+    &:not(:has(.factory__summary)) {
+        padding-bottom: 50px;
+    }
+
+    &__boxes {
+        display: flex;
+        gap: $gap3;
+        margin-top: 10rem;
+
+        @include respond-max($bp-phone-lg) {
+            flex-direction: column;
+        }
+    }
+
+    &__box {
+        @extend .box--black;
+        display: flex;
+        flex-direction: column;
+        gap: $gap2;
+        padding: $card-padding;
+        align-items: flex-start;
+        padding-top: 10rem;
+        cursor: pointer;
+
+        & * {
+            text-align: left;
+        }
+
+        &:hover {
+            @extend .box--primary;
+
+            & > p {
+                @extend .text--white;
+            }
+        }
+
+        & > span {
+            @extend .text--fat;
+        }
+
+        & > p {
+            @extend .text--grey;
+        }
+    }
+
+    &__buttons {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: $gap2;
+    }
+
+    &__section {
+        @extend .box--grey;
+
+        &:not(:has(&__cell)) {
+            @extend .factory__section__cell;
+        }
+
+        &__cell {
+            padding: $card-padding;
+            display: flex;
+            flex-direction: column;
+            gap: $gap2;
+        }
+    }
+
+    &__summary {
+        @extend .factory__section;
+        @extend .box--grey;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border-color: $colorGrey2 !important;
+
+        container-type: inline-size;
+
+        &__simple-value {
+            flex-direction: row;
+            gap: $gap1;
+            display: grid;
+            grid-template-columns: 30rem max-content;
+            place-items: flex-start;
+
+            @container (max-width: 540px) {
+                grid-template-columns: 20rem max-content;
+            }
+
+            & > :first-child {
+                // @extend .text--fat;
+                color: $colorGrey2;
+            }
+
+            & > :nth-child(2) {
+                color: $colorWhite;
+                display: flex;
+                flex-direction: column;
+                gap: $gap2;
+                align-items: flex-start;
+            }
+        }
+
+        &__inner-grid {
+            @extend .factory__section__cell;
+
+            padding: 0;
+            margin: $card-padding;
+
+            background-color: $colorGrey1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            border: 1px solid $colorGrey1;
+            border-radius: $btn-radius;
+            overflow: hidden;
+
+            @container (max-width: 540px) {
+                grid-template-columns: 1fr;
+            }
+
+            &__cell {
+                background-color: $colorGrey0;
+                padding: $btn-padding;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                place-items: center;
+                gap: $gap2;
+
+                & > :nth-child(1) {
+                    justify-self: flex-end;
+                    color: $colorGrey2;
+                }
+
+                & > :nth-child(2) {
+                    justify-self: flex-start;
+                    color: $colorWhite;
+                }
+            }
+        }
+
+        &__recipients {
+            @extend .factory__section__cell;
+
+            gap: $gap1;
+        }
+
+        &__recipient {
+            display: grid;
+            grid-template-columns: 1fr 1fr 0.5fr;
+            gap: 1px;
+            background-color: $colorGrey1;
+            border: 1px solid $colorGrey1;
+            border-radius: $btn-radius;
+            overflow: hidden;
+
+            @container (max-width: 540px) {
+                grid-template-columns: 1fr;
+            }
+
+            &--waterfall {
+                @extend .factory__summary__recipient;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            &__cell {
+                background-color: $colorGrey0;
+                padding: $btn-padding;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                place-items: center;
+                gap: $gap2;
+
+                & > :nth-child(1) {
+                    justify-self: flex-end;
+                    color: $colorGrey2;
+                }
+
+                & > :nth-child(2) {
+                    justify-self: flex-start;
+                    color: $colorWhite;
+                }
+            }
+        }
+    }
+
+    &__roadmap {
+        display: flex;
+        align-items: stretch;
+        padding: $gap3 0;
+        width: 100%;
+        margin-bottom: $gap2;
+
+        @include respond-max($roadmapBp) {
+            flex-direction: column;
+            height: unset;
+            width: unset;
+            height: 20rem;
+            align-self: center;
+            // padding-inline: $gapBig + $gapSmall;
+        }
+
+        &__wrapper {
+            @include container;
+            display: flex;
+            flex-direction: column;
+
+            @include respond-max($roadmapBp) {
+            }
+        }
+
+        &__separator {
+            flex-grow: 1;
+
+            @include respond-max($roadmapBp) {
+                background: linear-gradient(90deg, transparent 40%, 40%, rgba($colorGrey1, 0.5) 60%, 60%, transparent);
+                width: $iconMargin;
+            }
+
+            &.--active {
+                background: linear-gradient(0deg, transparent 20%, 20%, rgba($colorPrimary, 0.8) 80%, 80%, transparent);
+                margin-inline: 0;
+                border-radius: 10px;
+                width: 100%;
+
+                @include respond-max($roadmapBp) {
+                    background: linear-gradient(90deg, transparent 20%, 20%, rgba($colorPrimary, 0.8) 80%, 80%, transparent);
+                    width: $iconMargin;
+                }
+            }
+
+            background: linear-gradient(0deg, transparent 40%, 40%, rgba($colorGrey1, 0.5) 60%, 60%, transparent);
+            width: 100%;
+            height: $iconMargin;
+            // margin-inline: 1px;
+        }
+
+        &__item {
+            @extend .box--with-icon;
+            margin-block: -8px;
+            // margin-inline: -1rem;
+            z-index: 1;
+            text-align: center;
+            flex-direction: column;
+
+            @include respond-max($roadmapBp) {
+                flex-direction: row;
+                margin-left: -$iconMargin;
+            }
+
+            &__label {
+                @extend .text--small;
+                transition: all 0.2s;
+
+                @include respond-max($roadmapBp) {
+                    max-width: min-content;
+                }
+            }
+        }
+    }
+}
+
+.factory-prepayment {
+    &__grid-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $gap3 * 2 $gap2;
+
+        @include respond-max($bp-tablet) {
+            grid-template-columns: 1fr;
+            gap: $gap3;
+        }
+    }
+}
+
+.factory-step-2 {
+    @extend .factory;
+    height: 100%;
+}

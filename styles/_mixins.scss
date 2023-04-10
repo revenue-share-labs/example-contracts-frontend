@@ -1,0 +1,53 @@
+@use './_variables.scss';
+
+@mixin container {
+    margin: 0 auto;
+    width: min(100%, 1400px);
+    position: relative;
+    padding-inline: 2rem;
+}
+
+@mixin container-narrower {
+    @include container;
+    width: min(100%, 1150px);
+}
+
+@mixin background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+@mixin firefox() {
+    @-moz-document url-prefix() {
+        @content;
+    }
+}
+
+@mixin safari() {
+    @media not all and (min-resolution: 0.001dpcm) {
+        @supports (-webkit-appearance: none) {
+            @content;
+        }
+    }
+}
+
+@function vh($quantity) {
+    @return calc(var(--vh, 1vh) * #{$quantity});
+}
+
+@mixin full-height-minus-bars($property: 'height', $base: vh(100)) {
+    #{$property}: calc($base - $navbarHeight);
+}
+
+@mixin respond-max($breakpoint) {
+    @media only screen and (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin respond-min($breakpoint) {
+    @media only screen and (min-width: (calc($breakpoint + 0.1px))) {
+        @content;
+    }
+}

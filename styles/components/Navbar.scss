@@ -1,0 +1,163 @@
+@use '../boot.scss';
+
+$navbarPaddingVertical: 1.8rem;
+
+$hamburgerBreakpoint: $bp-tablet;
+
+.navbar {
+    width: 100vw;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    background-color: $colorBlack;
+    z-index: 1000;
+    transition: height 400ms;
+    opacity: 0.999;
+    padding: 1.8rem 0;
+    display: flex;
+    height: $navbarHeight;
+    // min-height: 60px;
+
+    &__content {
+        @include container;
+
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    &__logo {
+        height: $navbarHeight - ($navbarPaddingVertical * 2);
+        aspect-ratio: 858 / 268;
+        position: relative;
+        z-index: 2;
+        margin-right: 5rem;
+        cursor: pointer;
+        color: $colorWhite;
+
+        @include respond-max($bp-tablet) {
+            margin-right: auto;
+        }
+
+        & svg {
+            transition: color 0.2s;
+        }
+
+        &:active svg {
+            color: $colorPrimary;
+        }
+    }
+
+    &__navigation {
+        &__item {
+            color: #5f7799;
+
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: color 400ms, scale 200ms;
+
+            &:hover {
+                color: $colorGrey3;
+            }
+
+            &:active {
+                transition: color 10ms, scale 10ms;
+                scale: 0.95;
+                color: $colorGrey3;
+            }
+
+            &.--active {
+                @extend .text-primary-gradient;
+            }
+        }
+
+        &--desktop {
+            display: flex;
+            gap: 2rem;
+            // justify-content: center;
+            flex-grow: 1;
+            @include respond-max($bp-tablet) {
+                display: none;
+            }
+        }
+
+        &--mobile {
+            position: relative;
+            z-index: 1;
+
+            @include respond-min($hamburgerBreakpoint) {
+                display: none;
+            }
+        }
+    }
+}
+
+.wallet-btn {
+    &--desktop {
+        display: contents;
+        @include respond-max($hamburgerBreakpoint) {
+            display: none;
+        }
+    }
+}
+
+.mobile-nav {
+    @include full-height-minus-bars;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: $colorBlack;
+    width: 100%;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+
+    &__list {
+        // position: fixed;
+        // top: 50%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+    }
+
+    &__item {
+        font-weight: $fontWeight3;
+        font-size: $fontSizeBig;
+        padding: $btn-padding;
+        width: 100%;
+        padding-block: $card-padding-vertical;
+        cursor: pointer;
+
+        border-bottom: 1px solid $colorGrey1;
+    }
+
+    &__other {
+        @include container;
+        // width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: auto;
+        padding-block: $card-padding-vertical;
+        gap: $gap2;
+    }
+
+    &__hamburger {
+        outline: none;
+        border: none;
+        user-select: none;
+        cursor: pointer;
+        display: grid;
+        place-content: center;
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        background: transparent;
+        transition: background 0.2s;
+
+        &:hover {
+            background: rgba($colorGrey2, 0.1);
+        }
+    }
+}

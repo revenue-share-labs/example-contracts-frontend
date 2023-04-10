@@ -1,0 +1,46 @@
+.switch {
+    @extend .btn--grey;
+
+    align-self: stretch;
+    padding: $btn-radius / 2 !important;
+    display: flex;
+    justify-content: space-between;
+
+    &.--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    &__item {
+        flex-basis: 50%;
+        position: relative;
+        color: $colorPrimary;
+        border-radius: $btn-radius;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: calc($btn-padding-vertical - 2px) calc($btn-padding-horizontal - 2px);
+        transition: all 0.2s;
+
+        &--selected {
+            color: $colorWhite;
+        }
+
+        & span {
+            position: relative;
+            @extend .text--fat;
+        }
+    }
+
+    &__selected {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: $btn-radius - 3px;
+        background-color: $colorPrimary;
+        box-shadow: $shadowPrimary;
+    }
+}

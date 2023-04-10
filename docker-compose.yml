@@ -1,0 +1,13 @@
+version: "3.5"
+
+services:
+  contract:
+    image: registry.gitlab.com/x.la/revenue-share-protocol/blockczech/xla-frontend:latest
+    container_name: always
+    env_file: .env
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: 100m

@@ -1,0 +1,509 @@
+@use '../boot';
+
+$layoutBp: $bp-tablet + 5em;
+
+.valve-dash {
+    @include container;
+
+    @media (min-height: 800px) {
+        @include full-height-minus-bars(height, calc(vh(100) - $layoutVerticalPadding * 2));
+    }
+
+    // max-width: 100rem;
+    min-height: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    gap: $gap3;
+
+    @include respond-max($layoutBp) {
+        flex-direction: column;
+    }
+
+    &__left {
+        display: flex;
+        gap: $gap3;
+        flex-direction: column;
+        align-self: stretch;
+    }
+
+    &__right {
+        max-width: 100rem;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2rem;
+
+        @include respond-max($layoutBp) {
+            width: 100%;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        width: 100%;
+        gap: $gap2;
+        & > :first-child {
+            flex-grow: 1;
+        }
+    }
+
+    &__list {
+        display: inherit;
+        flex-direction: inherit;
+        align-items: inherit;
+        gap: inherit;
+    }
+
+    &__title {
+        font-size: $fontSizeHuge;
+        font-weight: $fontWeight4;
+        text-align: center;
+    }
+
+    &__title2 {
+        font-size: $fontSizeBig;
+        font-weight: $fontWeight3;
+
+        text-align: left;
+    }
+
+    &__head {
+        display: flex;
+        gap: 1rem;
+
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__pie {
+        width: 2.5rem;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        // background: conic-gradient($colorPrimary 30%, $colorGrey3 30%);
+    }
+
+    &__boxes {
+        // display: grid;
+        display: flex;
+        grid-auto-flow: column;
+        gap: 2rem;
+        flex-wrap: wrap;
+
+        & > * {
+            flex-grow: 1;
+            flex-basis: 20%;
+        }
+    }
+
+    &__box {
+        @extend .box--light;
+
+        padding: $btn-padding;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+
+        &__usd {
+            display: flex;
+            align-items: center;
+            font-size: $fontSizeNormal;
+            font-weight: $fontWeight1;
+            color: $colorGrey2;
+            opacity: 0.75;
+        }
+
+        & > :nth-child(1) {
+            font-size: $fontSizeSmall;
+            font-weight: $fontWeight1;
+        }
+
+        &__value {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+
+            font-size: $fontSizeBig;
+            font-weight: $fontWeight3;
+            color: $colorWhite;
+        }
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        padding: $btn-padding;
+        gap: 1rem;
+        align-items: stretch;
+
+        @include respond-max($layoutBp) {
+            gap: 0.5rem;
+            padding: $btn-padding-small;
+        }
+    }
+
+    &__recipient {
+        @extend .btn--grey;
+        @extend .valve-dash__row;
+
+        overflow: hidden;
+
+        &__first-part {
+            display: flex;
+            align-items: center;
+            align-self: flex-start;
+            gap: 2rem;
+            flex-shrink: 1;
+            padding: 0 $btn-padding-horizontal;
+            flex-basis: 15rem;
+            margin-top: 2rem;
+            color: $colorWhite;
+        }
+
+        &__second-part {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            gap: $btn-padding-vertical;
+            padding: 0 $btn-padding-horizontal;
+            overflow: hidden;
+
+            &__top {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        &__address-part {
+            flex-grow: 1;
+            text-align: left;
+            display: flex;
+            gap: $gap2;
+            align-items: flex-start;
+            flex-direction: column;
+            color: $colorWhite;
+            font-size: $fontSizeBig;
+
+            & > :first-child {
+                width: fit-content;
+                padding: 0;
+                background: none;
+                border: none;
+            }
+        }
+
+        &__details {
+            // display: flex;
+            // justify-content: flex-start;
+            // flex-wrap: wrap;
+            gap: 2rem;
+            display: grid;
+
+            &__item {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                :nth-child(1) {
+                    // @extend .text--grey;
+                    @extend .text--thin;
+                }
+
+                :nth-child(2) > :nth-child(2) {
+                    font-size: $fontSizeBig;
+                    font-weight: $fontWeight1;
+                }
+            }
+        }
+
+        &__details-button {
+            @include respond-max($bp-phone-lg) {
+                display: none;
+            }
+        }
+    }
+
+    &__recipients {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        height: 100%;
+        overflow: auto;
+    }
+
+    &__distribute-btn {
+        @extend .btn--primary;
+
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+
+        @include respond-max($bp-phone-lg) {
+            justify-content: space-between;
+        }
+    }
+
+    &__side-panel {
+        display: flex;
+        flex-direction: column;
+        gap: $gap1;
+
+        @include respond-max($layoutBp) {
+            align-items: stretch;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+    }
+}
+
+.distribute-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+
+    &__top-card {
+        @extend .box--grey;
+        @extend .btn--wider;
+
+        padding: $btn-padding;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    &__nav {
+        display: flex;
+        gap: $gap2;
+    }
+}
+
+.add-recipient-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+
+    width: 40rem !important;
+
+    &__top-card {
+        @extend .box--grey;
+
+        padding: $btn-padding;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    &__input-part {
+        // display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+
+        width: 100%;
+
+        @include respond-max($layoutBp) {
+            grid-template-columns: 1fr;
+        }
+        // & > * {
+        //     flex-grow: 1;
+        // }
+    }
+
+    &__share-part {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+}
+
+.investor-dash-data {
+    @extend .box--grey;
+
+    padding: $card-padding;
+    // padding: $btn-padding;
+    container-type: inline-size;
+
+    display: flex;
+    flex-direction: column;
+    gap: $gap3;
+
+    &__row1 {
+        display: flex;
+        gap: $gap2;
+        align-items: center;
+        // flex-wrap: wrap;
+        justify-content: space-between;
+
+        @include respond-max($bp-phone-lg) {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        &__left {
+            display: flex;
+            gap: $gap2;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        &__right {
+        }
+
+        &__name {
+            // @extend .text--grey;
+            @extend .text--fat;
+        }
+    }
+
+    &__row2 {
+        display: grid;
+        gap: $gap2 $gap2;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-auto-flow: column;
+        place-items: flex-start;
+
+        @include respond-max(1400px) {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+        }
+
+        @include respond-max(900px) {
+            display: flex;
+            flex-direction: column;
+            // grid-template-columns: repeat(1, 1fr);
+            // grid-template-rows: repeat(4, 1fr);
+        }
+
+        & > * {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: $gap1;
+
+            & > :first-child {
+                // @extend .text--grey;
+                @extend .text--fat;
+            }
+        }
+    }
+
+    &__progress-bar {
+        @extend .box--black;
+
+        border-radius: 4px !important;
+
+        height: 0.5cm;
+        width: 2.5cm;
+        overflow: hidden;
+
+        &__inner {
+            height: 100%;
+            background: $primaryGradient;
+        }
+    }
+}
+
+.waterfall-dash {
+    &__recipient {
+        @extend .btn--grey;
+        @extend .valve-dash__row;
+
+        overflow: hidden;
+
+        &__progress {
+            width: 4rem;
+            aspect-ratio: 3 / 1;
+        }
+
+        &__first-part {
+            display: flex;
+            align-items: center;
+            align-self: flex-start;
+            gap: 2rem;
+            flex-shrink: 1;
+            padding: 0 $btn-padding-horizontal;
+            flex-basis: 15rem;
+            // margin-top: 2rem;
+            color: $colorWhite;
+            flex-direction: column;
+            align-self: center;
+        }
+
+        &__second-part {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            gap: $btn-padding-vertical;
+            padding: 0 $btn-padding-horizontal;
+            overflow: hidden;
+
+            &__top {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        &__address-part {
+            flex-grow: 1;
+            text-align: left;
+            display: flex;
+            gap: $gap2;
+            align-items: flex-start;
+            flex-direction: column;
+            color: $colorWhite;
+            font-size: $fontSizeBig;
+
+            & > :first-child {
+                width: fit-content;
+                padding: 0;
+                background: none;
+                border: none;
+            }
+        }
+
+        &__details {
+            // display: flex;
+            // justify-content: flex-start;
+            // flex-wrap: wrap;
+            gap: 2rem;
+            display: grid;
+
+            &__item {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                :nth-child(1) {
+                    // @extend .text--grey;
+                    @extend .text--thin;
+                }
+
+                :nth-child(2) > :nth-child(2) {
+                    font-size: $fontSizeBig;
+                    font-weight: $fontWeight1;
+                }
+            }
+        }
+
+        &__details-button {
+            @include respond-max($bp-phone-lg) {
+                display: none;
+            }
+        }
+    }
+}

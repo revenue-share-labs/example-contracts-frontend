@@ -1,0 +1,70 @@
+@use './_variables';
+
+.text-primary-gradient {
+    background: $primaryGradient;
+    background-clip: text;
+    color: transparent;
+}
+
+.inherit-font {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+
+.h1 {
+    font-size: $fontSizeHuge;
+    font-weight: $fontWeight3;
+    color: $colorWhite;
+}
+
+.text {
+    &--align-center {
+        text-align: center;
+    }
+
+    &--align-left {
+        text-align: left;
+    }
+
+    &--grey {
+        color: $colorGrey2;
+    }
+
+    &--white {
+        color: $colorWhite;
+    }
+
+    &--error {
+        color: $colorError;
+        text-shadow: $colorGrey1 0px 0px 3px;
+    }
+
+    &--small {
+        font-size: $fontSizeSmall !important;
+    }
+
+    &--normal-size {
+        font-size: $fontSizeNormal !important;
+    }
+
+    &--big {
+        font-size: $fontSizeBig !important;
+    }
+
+    &--huge {
+        font-size: $fontSizeHuge !important;
+    }
+
+    &--fat {
+        font-weight: $fontWeight3;
+    }
+
+    &--fatter {
+        font-weight: $fontWeight4;
+    }
+
+    &--thin {
+        font-weight: $fontWeight1;
+    }
+}

@@ -1,0 +1,76 @@
+@use '../_variables';
+@use 'sass:color';
+
+.box {
+    border-radius: $btn-radius;
+    // font-weight: $fontWeight1;
+    font-size: $fontSizeNormal;
+    transition: all 0.2s;
+    text-align: center;
+
+    &--grey {
+        @extend .box;
+        background: $colorGrey0;
+        color: $colorGrey3;
+        border: 1px solid $colorGrey1;
+    }
+
+    &--primary {
+        @extend .box;
+        background: $primaryGradient;
+        color: $colorWhite;
+        text-shadow: $colorGrey1 0px 0px 3px;
+    }
+
+    &--primary-text {
+        @extend .box;
+        @extend .text-primary-gradient;
+    }
+
+    &--danger {
+        @extend .box;
+        background: transparent;
+        color: $colorGrey2;
+        border: 1px solid $colorError;
+    }
+
+    &--outline {
+        @extend .box;
+        background: transparent;
+        color: $colorPrimary;
+        border: 1px solid $colorPrimary;
+        box-shadow: $shadowPrimary;
+    }
+
+    &--light {
+        @extend .box;
+        background: $colorGrey1;
+        color: $colorGrey3;
+        border: 1px solid transparent;
+    }
+
+    &--transparent {
+        @extend .box;
+        border: 1px solid transparent;
+
+        @extend .text-primary-gradient;
+    }
+
+    &--black {
+        @extend .box;
+        background: $colorBlack;
+        color: $colorWhite;
+        border: 1px solid $colorGrey1;
+        // text-shadow: #3d3d3d 0px 0px 3px;
+    }
+
+    &--round {
+        border-radius: 100px !important;
+    }
+
+    &--with-icon {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+}
