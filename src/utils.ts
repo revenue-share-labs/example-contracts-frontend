@@ -5,7 +5,7 @@ import { utils, BigNumber as BigNumberEthers } from 'ethers';
 import { blockchainData } from './constants';
 import { Blockchain } from './types';
 
-export const PUBLIC_BASE_PATH = '/contracts/old';
+export const PUBLIC_BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
 
 export const hexToNumber = (val: string): number => {
     return parseInt(val, 16);

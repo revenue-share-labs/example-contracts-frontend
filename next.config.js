@@ -2,8 +2,8 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    basePath: '/contracts/old',
-    assetPrefix: '/contracts/old',
+    basePath: process.env.NEXT_PUBLIC_BASE_PATH,
+    assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX,
     reactStrictMode: false,
     swcMinify: false,
     sassOptions: {
